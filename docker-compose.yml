@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+    angular:
+        container_name: angular_for_oauth2
+        build:
+            context: ./angular_for_oauth2
+        ports:
+            - '4200:4200'
+        volumes:
+            - ./angular_for_oauth2:/app
+            - node_modules:/app/node_modules
+
+volumes:
+    node_modules:
+
+
