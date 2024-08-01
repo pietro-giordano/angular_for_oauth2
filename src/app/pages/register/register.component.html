@@ -15,14 +15,16 @@
                 <input formControlName="email" type="text" class="grow" placeholder="Email" />
             </label>
 
-            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-error">
-                <div *ngIf="email.hasError('required')">
-                    Email is required.
-                </div>
-                <div *ngIf="email.hasError('email')">
-                    Invalid pattern for email.
-                </div>
+            @if(email.invalid && (email.dirty || email.touched)) {
+            <div class="text-error">
+                @if(email.hasError('required')) {
+                <div>Email is required.</div>
+                }
+                @if(email.hasError('email')) {
+                <div>Invalid pattern for email.</div>
+                }
             </div>
+            }
         </div>
 
         <div>
@@ -37,17 +39,19 @@
                 <input formControlName="username" type="text" class="grow" placeholder="Username" />
             </label>
 
-            <div *ngIf="username.invalid && (username.dirty || username.touched)" class="text-error">
-                <div *ngIf="username.hasError('required')">
-                    Username is required.
-                </div>
-                <div *ngIf="username.hasError('minlength')">
-                    Username min length 6 characters.
-                </div>
-                <div *ngIf="username.hasError('maxlength')">
-                    Username max length 32 characters.
-                </div>
+            @if(username.invalid && (username.dirty || username.touched)) {
+            <div class="text-error">
+                @if(username.hasError('required')) {
+                <div>Username is required.</div>
+                }
+                @if(username.hasError('minlength')) {
+                <div>Username min length 6 characters.</div>
+                }
+                @if(username.hasError('maxlength')) {
+                <div>Username max length 32 characters.</div>
+                }
             </div>
+            }
         </div>
 
         <div>
@@ -63,14 +67,41 @@
                 <input formControlName="password" type="password" class="grow" placeholder="Password" />
             </label>
 
-            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-error">
-                <div *ngIf="password.hasError('required')">
-                    Password is required.
-                </div>
-                <div *ngIf="password.hasError('minlength')">
-                    Password min length 8 characters.
-                </div>
+            @if(password.invalid && (password.dirty || password.touched)) {
+            <div class="text-error">
+                @if(password.hasError('required')) {
+                <div>Password is required.</div>
+                }
+                @if(password.hasError('minlength')) {
+                <div>Password min length 8 characters.</div>
+                }
             </div>
+            }
+        </div>
+
+        <div>
+            <label class="input input-bordered flex items-center gap-2"
+                [class.input-error]="(confirmPassword.invalid || registerForm.invalid) && (confirmPassword.dirty || confirmPassword.touched)"
+                [class.input-success]="confirmPassword.valid && registerForm.valid">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                    class="h-4 w-4 opacity-70">
+                    <path fill-rule="evenodd"
+                        d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                        clip-rule="evenodd" />
+                </svg>
+                <input formControlName="confirmPassword" type="password" class="grow" placeholder="Confirm password" />
+            </label>
+
+            @if(registerForm.invalid && (confirmPassword.dirty || confirmPassword.touched)) {
+            <div class="text-error">
+                @if(confirmPassword.hasError('required')) {
+                <div>Confirm password is required.</div>
+                }
+                @if(registerForm.hasError('passwordMismatch')) {
+                <div>Confirm password doesn't match with password.</div>
+                }
+            </div>
+            }
         </div>
 
         <button [disabled]="!registerForm.valid" type="submit" class="btn btn-outline">Register</button>

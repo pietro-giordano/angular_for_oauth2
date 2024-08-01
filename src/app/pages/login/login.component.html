@@ -14,14 +14,16 @@
                 <input formControlName="email" type="text" class="grow" placeholder="Email" />
             </label>
 
-            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-error">
-                <div *ngIf="email.hasError('required')">
-                    Email is required.
-                </div>
-                <div *ngIf="email.hasError('email')">
-                    Invalid pattern for email.
-                </div>
+            @if(email.invalid && (email.dirty || email.touched)) {
+            <div class="text-error">
+                @if(email.hasError('required')) {
+                <div>Email is required.</div>
+                }
+                @if(email.hasError('email')) {
+                <div>Invalid pattern for email.</div>
+                }
             </div>
+            }
         </div>
 
         <div>
@@ -37,14 +39,16 @@
                 <input formControlName="password" type="password" class="grow" placeholder="Password" />
             </label>
 
-            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-error">
-                <div *ngIf="password.hasError('required')">
-                    Password is required.
-                </div>
-                <div *ngIf="password.hasError('minlength')">
-                    Password min length 8 characters.
-                </div>
+            @if(password.invalid && (password.dirty || password.touched)) {
+            <div class="text-error">
+                @if(password.hasError('required')) {
+                <div>Password is required.</div>
+                }
+                @if(password.hasError('minlength')) {
+                <div>Password min length 8 characters.</div>
+                }
             </div>
+            }
         </div>
 
         <button [disabled]="!loginForm.valid" type="submit" class="btn btn-outline">Login</button>
