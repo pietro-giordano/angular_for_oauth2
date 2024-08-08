@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -14,6 +15,8 @@ export class LoginComponent {
         password: new FormControl(null, { validators: [Validators.required, Validators.minLength(8)] })
     });
 
+    constructor(private authService: AuthService) { }
+
     get email(): FormControl {
         return this.loginForm.get('email') as FormControl;
     }
@@ -23,6 +26,6 @@ export class LoginComponent {
     }
 
     onSubmit(): void {
-        console.log('ciao')
+        this.authService.redirectToOauthAuth();
     }
 }
