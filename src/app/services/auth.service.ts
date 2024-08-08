@@ -13,6 +13,7 @@ const REDIRECT_URI = environment.redirect_uri;
 @Injectable({
     providedIn: 'root'
 })
+
 export class AuthService {
     public currentUser: WritableSignal<User | null | undefined> = signal<User | null | undefined>(undefined);
 
