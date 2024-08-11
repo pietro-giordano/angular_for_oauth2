@@ -7,6 +7,6 @@ import { OauthCallbackComponent } from './pages/oauth-callback/oauth-callback.co
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'callback', component: OauthCallbackComponent },
+    { path: 'auth/callback', component: OauthCallbackComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
