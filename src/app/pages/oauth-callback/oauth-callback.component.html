@@ -1,1 +1,15 @@
-<p>oauth-callback works!</p>
+@if (error) {
+<div class="flex justify-center mt-8">
+    <div class="text-error p-4 border-2 border-rose-500 rounded-md inline-block">
+        {{ error }}
+    </div>
+</div>
+}
+
+@if (success) {
+<div class="flex justify-center mt-8">
+    <div class="text-success p-4 border-2 border-green-500 rounded-md inline-block">
+        {{ success }}
+    </div>
+</div>
+}

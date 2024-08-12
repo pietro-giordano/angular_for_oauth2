@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { oauthResponse } from '../../models/auth';
 
 @Component({
     selector: 'app-oauth-callback',
@@ -10,6 +11,9 @@ import { AuthService } from '../../services/auth.service';
     styleUrl: './oauth-callback.component.css'
 })
 export class OauthCallbackComponent {
+    public error: string | null = null;
+    public success: string | null = null;
+
     constructor(private route: ActivatedRoute, private authService: AuthService) { }
 
     ngOnInit(): void {
@@ -18,12 +22,16 @@ export class OauthCallbackComponent {
             const state = params['state'];
 
             this.authService.sendAuthCodeForToken(code, state).subscribe({
-                next: (response) => {
+                next: (response: oauthResponse) => {
                     console.log(response)
-                    // se la risposta è ok salvare i vari token?
+                    this.authService.accessToken.set(response.access_token);
+                    this.authService.refreshToken.set(response.refresh_token);
+                    this.authService.expiresToken.set(response.expires_in);
+                    this.success = 'Autenticazione avvenuta con successo!';
                 },
                 error: (error) => {
                     console.error(error)
+                    this.error = error.message;
                 }
             });
         });
