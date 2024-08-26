@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
     styleUrl: './login.component.css'
 })
 export class LoginComponent {
+    public isLoading: boolean = false;
     loginForm: FormGroup = new FormGroup({
         email: new FormControl(null, { validators: [Validators.required, Validators.email] }),
         password: new FormControl(null, { validators: [Validators.required, Validators.minLength(8)] })
@@ -26,6 +27,7 @@ export class LoginComponent {
     }
 
     onSubmit(): void {
+        this.isLoading = true;
         this.authService.redirectToOauthAuth();
     }
 }

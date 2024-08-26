@@ -13,6 +13,7 @@ import { oauthResponse } from '../../models/auth';
 export class OauthCallbackComponent {
     public error: string | null = null;
     public success: string | null = null;
+    public isLoading: boolean = true;
 
     constructor(private route: ActivatedRoute, private authService: AuthService) { }
 
@@ -25,8 +26,12 @@ export class OauthCallbackComponent {
                 next: (response: oauthResponse) => {
                     console.log(response)
                     this.authService.accessToken.set(response.access_token);
+                    sessionStorage.setItem('accessToken', response.access_token);
                     this.authService.refreshToken.set(response.refresh_token);
+                    sessionStorage.setItem('refreshToken', response.refresh_token);
                     this.authService.expiresToken.set(response.expires_in);
+                    sessionStorage.setItem('expiresToken', response.expires_in.toString());
+                    this.isLoading = false;
                     this.success = 'Autenticazione avvenuta con successo!';
                 },
                 error: (error) => {

@@ -16,6 +16,7 @@ const REDIRECT_URI = environment.redirect_uri;
 
 export class AuthService {
     public currentUser: WritableSignal<User | null | undefined> = signal<User | null | undefined>(undefined);
+    public isAuthenticated: WritableSignal<boolean | null | undefined> = signal<boolean | undefined>(undefined);
     public accessToken: WritableSignal<string | null | undefined> = signal<string | null | undefined>(undefined);
     public refreshToken: WritableSignal<string | null | undefined> = signal<string | null | undefined>(undefined);
     public expiresToken: WritableSignal<number | null | undefined> = signal<number | null | undefined>(undefined);

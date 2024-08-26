@@ -56,3 +56,9 @@
 
     <button (click)="onSubmit()" class="btn btn-outline">Redirect to oauth2 login</button>
 </div>
+
+@if (isLoading) {
+<div class="flex justify-center mt-8">
+    <progress class="progress w-72"></progress>
+</div>
+}
